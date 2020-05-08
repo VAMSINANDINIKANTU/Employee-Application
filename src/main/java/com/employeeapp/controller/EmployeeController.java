@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.employeeapp.entities.Employee;
 import com.employeeapp.exceptionhandler.EmployeeNotFoundException;
 import com.employeeapp.service.EmployeeService;
+
 @RestController
 public class EmployeeController {
 
@@ -46,12 +47,12 @@ public class EmployeeController {
 	@GetMapping(path = "/employeeLastName/{lastName}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Employee> getAnEmployeeByLastName(@PathVariable(name = "lastName") String lastName) {
 		Employee employee = employeeservice.findEmployeeBylastName(lastName).orElseThrow(() -> new EmployeeNotFoundException(lastName));
-        return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+                return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 
 	@GetMapping(path = "/employeeName/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Employee> getAnEmployeeByName(@PathVariable(name = "fullName") String fullName) {
 		Employee employee = employeeservice.findEmployeeByName(fullName).orElseThrow(() -> new EmployeeNotFoundException(fullName));
-        return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+                return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 }
