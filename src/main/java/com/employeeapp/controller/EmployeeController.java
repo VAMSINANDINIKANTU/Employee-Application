@@ -12,44 +12,46 @@ import com.employeeapp.exceptionhandler.EmployeeNotFoundException;
 import com.employeeapp.service.EmployeeService;
 @RestController
 public class EmployeeController {
+
 	@Autowired
 	private EmployeeService employeeservice;
-    public EmployeeController(EmployeeService employeeservice) {
+
+	public EmployeeController(EmployeeService employeeservice) {
 		super();
 		this.employeeservice = employeeservice;
 	}
-    
-    @GetMapping(path = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Employee> getAnEmployeeById(@PathVariable(name = "id") Long id){
+
+	@GetMapping(path = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> getAnEmployeeById(@PathVariable(name = "id") Long id) {
 		Employee employee = employeeservice.findEmployeeById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
-    
-    @GetMapping(path="/employee/limit/{salary}",produces=MediaType. APPLICATION_JSON_VALUE) 
-    public ResponseEntity<List<Employee>> getAnEmployeeBySalary(@PathVariable(name="salary")double salary){ 
-    	return new ResponseEntity<List<Employee>>(employeeservice.findEmployeeBySalary(salary),HttpStatus.OK);
-    }
-    
-    @GetMapping(path = "/employee", produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@GetMapping(path = "/employee/limit/{salary}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Employee>> getAnEmployeeBySalary(@PathVariable(name = "salary") double salary) {
+		return new ResponseEntity<List<Employee>>(employeeservice.findEmployeeBySalary(salary), HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/employee", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 		return new ResponseEntity<List<Employee>>(employeeservice.getAllEmployee(), HttpStatus.OK);
 	}
-    
-    @GetMapping(path = "/employeeFirstName/{firstName}", produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@GetMapping(path = "/employeeFirstName/{firstName}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Employee> getAnEmployeeByFirstName(@PathVariable(name = "firstName") String firstName) {
-        Employee employee = employeeservice.findEmployeeByfirstName(firstName).orElseThrow(() -> new EmployeeNotFoundException(firstName));
+		Employee employee = employeeservice.findEmployeeByfirstName(firstName).orElseThrow(() -> new EmployeeNotFoundException(firstName));
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/employeeLastName/{lastName}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> getAnEmployeeByLastName(@PathVariable(name = "lastName") String lastName) {
+		Employee employee = employeeservice.findEmployeeBylastName(lastName).orElseThrow(() -> new EmployeeNotFoundException(lastName));
         return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-    }
-    
-    @GetMapping(path = "/employeeLastName/{lastName}", produces = MediaType.APPLICATION_JSON_VALUE)
-   	public ResponseEntity<Employee> getAnEmployeeByLastName(@PathVariable(name = "lastName") String lastName) {
-           Employee employee = employeeservice.findEmployeeBylastName(lastName).orElseThrow(() -> new EmployeeNotFoundException(lastName));
-           return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-    }
-    
-    @GetMapping(path = "/employeeName/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
-   	public ResponseEntity<Employee> getAnEmployeeByName(@PathVariable(name = "fullName") String fullName) {
-           Employee employee = employeeservice.findEmployeeByName(fullName).orElseThrow(() -> new EmployeeNotFoundException(fullName));
-           return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-    }
+	}
+
+	@GetMapping(path = "/employeeName/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> getAnEmployeeByName(@PathVariable(name = "fullName") String fullName) {
+		Employee employee = employeeservice.findEmployeeByName(fullName).orElseThrow(() -> new EmployeeNotFoundException(fullName));
+        return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
 }

@@ -3,8 +3,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="employeedetails_table_new")
 public class Employee {
@@ -19,6 +21,16 @@ public class Employee {
 	private String phone;
 	private String email;
 	private String address;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "employer_fk")
+	private Employer employer;
+	public Employer getEmployer() {
+		return employer;
+	}
+	public void setEmployer(Employer employer) {
+		this.employer = employer;
+	}
 	public Long getId() {
 		return id;
 	}

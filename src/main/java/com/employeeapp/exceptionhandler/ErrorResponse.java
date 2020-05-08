@@ -1,18 +1,22 @@
 package com.employeeapp.exceptionhandler;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-public class ErrorDetails {
+public class ErrorResponse {
 	private HttpStatus status;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private LocalDateTime timeStamp;
 	private String message;
+	private List<String> errors;
 	private String path;
+	public List<String> getErrors() {
+		return errors;
+	}
+	public void setErrors(List<String> errors) {
+		this.errors = errors;
+	}
 	public String getMessage() {
 		return message;
 	}
@@ -37,15 +41,17 @@ public class ErrorDetails {
 	public void setTimeStamp(LocalDateTime timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public ErrorDetails(HttpStatus status, LocalDateTime timeStamp, String message, String path) {
+	
+	public ErrorResponse(HttpStatus status, LocalDateTime timeStamp, String message, List<String> errors,
+			String path) {
 		super();
 		this.status = status;
 		this.timeStamp = timeStamp;
 		this.message = message;
+		this.errors = errors;
 		this.path = path;
-	
 	}
-	public ErrorDetails() {
+	public ErrorResponse() {
 		
 	}
 }
