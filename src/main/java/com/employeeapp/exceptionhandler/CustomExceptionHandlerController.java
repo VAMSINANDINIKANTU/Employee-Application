@@ -27,5 +27,5 @@ public class CustomExceptionHandlerController {
 	     errors.add(ex.getLocalizedMessage());
 	     ErrorResponse response=new ErrorResponse(HttpStatus.NOT_FOUND,LocalDateTime.now(),"record not found",errors,request.getDescription(false));
 	     return new ResponseEntity<ErrorResponse>(response,HttpStatus.NOT_FOUND);
-	}
+    }
 }
