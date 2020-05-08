@@ -1,5 +1,4 @@
 package com.employeeapp.exceptionhandler;
-
 public class EmployerNotFoundException extends RuntimeException{
    private static final long serialVersionUID = 1L;
    public EmployerNotFoundException(Long employerId)
@@ -9,6 +8,5 @@ public class EmployerNotFoundException extends RuntimeException{
    public EmployerNotFoundException(String employerName)
    {
 		   super("Employer name not found : " + employerName);
-		   
    }
 }
