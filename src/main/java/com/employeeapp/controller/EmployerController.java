@@ -14,7 +14,7 @@ import com.employeeapp.service.EmployerService;
 @RestController
 public class EmployerController {
 	private EmployerService employerservice;
-    @Autowired
+        @Autowired
 	public EmployerController(EmployerService employerservice) {
 		super();
 		this.employerservice = employerservice;
@@ -29,7 +29,7 @@ public class EmployerController {
 	public ResponseEntity<Employer> getAnEmployerById(@PathVariable(name = "employerId") Long employerId) {
 		Employer employer = employerservice.findEmployerById(employerId).orElseThrow(() -> new EmployerNotFoundException(employerId));
 		return new ResponseEntity<Employer>(employer, HttpStatus.OK);
-    }
+        }
 	
 	@GetMapping(path = "/managerName/{employerName}", produces = MediaType.APPLICATION_JSON_VALUE) 
 	public ResponseEntity<Employer>getAnEmployer(@PathVariable(name = "employerName") String employerName) {
